@@ -35,14 +35,17 @@ bot.onText(/\/start/, (msg) => {
 
 
 bot.on('message', async ctx => {
+
+    const intervalId = setInterval(async () => {
+        await bot.sendChatAction(ctx.chat.id, 'typing')
+    }, 1000)
+
     const user = await checkAndCreateUser(ctx)
     const messages = await getLastMessage(user)
     const prompt = await createPrompt(messages, ctx.text)
     await saveMessage(ctx, 'user', user, ctx.text)
 
-    const intervalId = setInterval(async () => {
-        await bot.sendChatAction(ctx.chat.id, 'typing')
-    }, 1000)
+
 
 
     let res = await getResponseGPT(openai, prompt)
