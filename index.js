@@ -47,6 +47,8 @@ bot.on('message', async ctx => {
 
     const res = await getResponseGPT(openai, prompt)
 
+    await bot.sendChatAction(ctx.chat.id, 'typing')
+
     await bot.sendMessage(ctx.chat.id, res)
 
     await saveMessage(ctx, 'assistant', user, res)
