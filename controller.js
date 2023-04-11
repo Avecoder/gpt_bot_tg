@@ -64,7 +64,7 @@ export const createPrompt = async (messages, prompt) => {
 }
 
 export const getLastMessage = async user => {
-    const messages = await Message.find({ userId: user._id }).sort({ createdAt: -1 })
+    const messages = await Message.find({ userId: user._id }).sort({ createdAt: -1 }).limit(10)
     return messages
 }
 
