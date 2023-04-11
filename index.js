@@ -43,6 +43,8 @@ bot.on('message', async ctx => {
 
     await saveMessage(ctx, 'user', user, ctx.text)
 
+    await bot.sendChatAction(ctx.chat.id, 'typing')
+
     const res = await getResponseGPT(openai, prompt)
 
     await bot.sendMessage(ctx.chat.id, res)
